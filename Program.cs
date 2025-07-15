@@ -1,38 +1,13 @@
-﻿using Director;
-using Builder;
-using Factory;
-using Product;
+﻿using Test;
 
 public class Program
 {
     public static void Main(string[] args)
     {
-        #region 工厂测试
-        // 简单工厂
-        Animal jack = Factory.SimpleFactory.CreateAnimal("Bird");
-        jack.Feed();
+        TestBlock testList = new TestBlock();
+        testList.AddTest(new FactoryTest());
+        testList.AddTest(new BuilderTest());
 
-        if (jack is Bird jackBird)
-        {
-            jackBird.Fly();
-        }
-
-        // 工厂模式
-        FactoryModeCreator BenzFactor = new BenzCreator();
-        ICar benz = BenzFactor.FactoryMethod();
-        benz.Drive();
-
-        FactoryModeCreator FordFactor = new FordCreator();
-        ICar ford = FordFactor.CreateFunction();
-        #endregion
-
-        #region 建造者模式
-        CharacterBuilder warriorBuilder = new CharacterBuilder();
-        WarriorDirector warriorDirector = new WarriorDirector(warriorBuilder);
-
-        Character arthur = warriorDirector.ConstructWarrior("Arthur");
-        Console.WriteLine(arthur);
-
-        #endregion
+        testList.RunAllTest();
     }
 }
