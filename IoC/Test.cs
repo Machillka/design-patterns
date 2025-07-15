@@ -2,6 +2,7 @@ using Builder;
 using Director;
 using Factory;
 using Product;
+using Adapter;
 
 namespace Test;
 
@@ -46,6 +47,19 @@ public class BuilderTest : ITest
     }
 }
 
+public class AdapterTest : ITest
+{
+    public void RunTest()
+    {
+        ApplePalSdk applePaySdk = new ApplePalSdk();
+        ApplePayAdapter applePay = new ApplePayAdapter(applePaySdk);
+        applePay.Process(100, "英镑");
+
+        PayPalAdapter payPalAdapter = new PayPalAdapter(new PayPalSdk());
+        payPalAdapter.Process(10, "美元");
+    }
+}
+
 // 定义所有测试模块
 public class TestBlock
 {
@@ -55,7 +69,9 @@ public class TestBlock
     {
         foreach (var test in tests)
         {
+            Console.WriteLine("Testing: " + test.GetType());
             test.RunTest();
+            Console.WriteLine("");
         }
     }
 

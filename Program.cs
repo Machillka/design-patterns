@@ -7,7 +7,7 @@ public class Program
         TestBlock testList = new TestBlock();
         testList.AddTest(new FactoryTest());
         testList.AddTest(new BuilderTest());
-
+        testList.AddTest(new AdapterTest());
         testList.RunAllTest();
     }
 }
